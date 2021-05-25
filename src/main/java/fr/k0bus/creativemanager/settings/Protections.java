@@ -15,6 +15,7 @@ public enum Protections {
     CONTAINER("container", Material.CHEST, "Protect container usage", "Container"),
     SPAWN("spawn", Material.MONSTER_EGG, "Protect spawn egg usage", "Spawn Egg"),
     DROP("drop", Material.DROPPER, "Protect player drop usage", "Drop"),
+    PICKUP("pickup", Material.TRIPWIRE_HOOK, "Protect pickup item on ground", "PickUp"),
     BUILD("build", Material.BRICK, "Protect build in creative", "Build"),
     ENTITY("entity", Material.ITEM_FRAME, "Protect entity usage (ItemFrame / ArmorStand ...)", "Entity"),
     PVP("pvp", Material.IRON_SWORD, "Disable PVP for Creative", "PVP"),
