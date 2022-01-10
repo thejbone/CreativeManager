@@ -35,24 +35,26 @@ public class PlayerHitEvent implements Listener {
 	 */
 	@EventHandler(ignoreCancelled = true)
 	public void onEntityHit(EntityDamageByEntityEvent e) {
-		if (e.getDamager() instanceof Player) {
-			Player attacker = (Player) e.getDamager();
-			if (attacker.getGameMode().equals(GameMode.CREATIVE)) {
-				if (e.getEntity() instanceof Player) {
-					if (!attacker.hasPermission("creativemanager.bypass.pvp") && plugin.getSettings().getProtection(Protections.PVP)) {
-						if (plugin.getSettings().getBoolean("send-player-messages"))
-							Messages.sendMessage(plugin.getMessageManager(), attacker, "permission.hit.player");
-						e.setCancelled(true);
-					}
-				} else {
-					if (!attacker.hasPermission("creativemanager.bypass.pve") && plugin.getSettings().getProtection(Protections.PVE)) {
-						if (plugin.getSettings().getBoolean("send-player-messages"))
-							Messages.sendMessage(plugin.getMessageManager(), attacker, "permission.hit.monster");
-						e.setCancelled(true);
+		try {
+			if (e.getDamager() instanceof Player) {
+				Player attacker = (Player) e.getDamager();
+				if (attacker.getGameMode().equals(GameMode.CREATIVE)) {
+					if (e.getEntity() instanceof Player) {
+						if (!attacker.hasPermission("creativemanager.bypass.pvp") && plugin.getSettings().getProtection(Protections.PVP)) {
+							if (plugin.getSettings().getBoolean("send-player-messages"))
+								Messages.sendMessage(plugin.getMessageManager(), attacker, "permission.hit.player");
+							e.setCancelled(true);
+						}
+					} else {
+						if (!attacker.hasPermission("creativemanager.bypass.pve") && plugin.getSettings().getProtection(Protections.PVE)) {
+							if (plugin.getSettings().getBoolean("send-player-messages"))
+								Messages.sendMessage(plugin.getMessageManager(), attacker, "permission.hit.monster");
+							e.setCancelled(true);
+						}
 					}
 				}
 			}
-		}
+		} catch (Exception ignored){}
 	}
 
 	/**
